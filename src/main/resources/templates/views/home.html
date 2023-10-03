@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body class="container bg-secondary">
+<div class="d-flex" style="align-items: center">
+    <a class="btn btn-success m-3" href="/create/book">Add Book</a>
+    <form class="d-flex" style="align-items: center">
+        <label for="search-input"> </label><input class="form-control w-75 my-2" type="search" name="search" id="search-input" placeholder="search...">
+        <button class="btn btn-primary mx-3">Search</button>
+    </form>
+</div>
+<table class="table table-bordered">
+    <thead class="table-dark">
+    <tr>
+        <th>id</th>
+        <th>title</th>
+        <th>author</th>
+        <th>description</th>
+        <th>price</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+
+    <tbody class="table-success">
+    <tr th:each="book : ${books}">
+        <td th:text="${book.getId()}"></td>
+        <td th:text="${book.getTitle()}"></td>
+        <td th:text="${book.getAuthor()}"></td>
+        <td th:text="${book.getDescription()}"></td>
+        <td th:text="${book.getPrice()}"></td>
+        <td class="d-flex">
+            <form th:action="@{'delete/book/'+${book.getId()}}" method="post">
+                <button class="btn btn-danger">Delete</button>||
+            </form>
+            <a th:href="@{'update/book/'+${book.getId()}}" class="btn btn-warning">Update</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
